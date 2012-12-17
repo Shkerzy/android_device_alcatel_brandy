@@ -1,4 +1,3 @@
-
 on boot
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -27,19 +26,8 @@ on boot
     mkdir /data/wpstiles/ 0771 shell
     mkdir /data/wiper 0771 location qcom_oncrpc
 
-     # Create directories for gpsone_daemon services
-    mkdir /data/gpsone_d 0770 gpsone_d qcom_oncrpc
-    mkdir /etc/gpsone_d 0770 gpsone_d qcom_oncrpc
-
      # Create directory from IMS services
     mkdir /data/shared 0771
-
-    #Set SUID bit for usbhub
-    #chmod 4755 /system/bin/usbhub
-    chmod 755 /system/bin/usbhub_init
-
-    #Provide the access to hostapd.conf only to root and group
-    chmod 0660 /data/hostapd/hostapd.conf
 
     # Remove write permissions to video related nodes
     chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
@@ -102,12 +90,6 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -BKL wlan0
     disabled
     oneshot
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    user root
-    group system qcom_oncrpc
-    disabled
-    oneshot
-
 service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
@@ -130,7 +112,6 @@ service baseband-sh /system/bin/sh /system/etc/init.baseband_version.sh
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
     start baseband-sh
-#    start qcom-wifi
 
 service ckpd /system/bin/CKPD-daemon
     user system
@@ -140,12 +121,6 @@ service ckpd /system/bin/CKPD-daemon
 
 on property:ro.service.ckpd.enable=1
     start ckpd
-
-service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
-    user root
-    group root
-    oneshot
-    disabled
 
 service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
     group radio

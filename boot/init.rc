@@ -330,6 +330,8 @@ on boot
     chown system system /sys/devices/platform/flash_led/led
     chmod 0777 /sys/class/leds/keyboard-backlight/brightness
     write /sys/class/leds/keyboard-backlight/brightness 255
+    chown system system /sys/devices/platform/notify-leds/blink_interval
+    chown system system /sys/devices/platform/notify-leds/blink_brightness
 
     chown root radio /proc/cmdline
 
@@ -496,15 +498,13 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
-##bt mac addr
 service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
     oneshot
-##wifi mac addr
+
 service wifi_macaddr /system/bin/nvcmd 0 4678 6 /system/wlan/broadcom/macaddr --format=le
     oneshot
 
 chmod 644 /system/wlan/broadcom/macaddr
-##end
 
 on device-added-/dev/akm8975_dev
     start akmd8975
