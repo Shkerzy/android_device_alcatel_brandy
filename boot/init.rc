@@ -330,8 +330,6 @@ on boot
     chown system system /sys/devices/platform/flash_led/led
     chmod 0777 /sys/class/leds/keyboard-backlight/brightness
     write /sys/class/leds/keyboard-backlight/brightness 255
-    chown system system /sys/devices/platform/notify-leds/blink_interval
-    chown system system /sys/devices/platform/notify-leds/blink_brightness
 
     chown root radio /proc/cmdline
 
