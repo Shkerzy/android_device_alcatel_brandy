@@ -222,7 +222,6 @@ PRODUCT_COPY_FILES += \
 
 # various files
 PRODUCT_COPY_FILES += \
-    device/alcatel/brandy/proprietary/lib/libtorch.so:/system/lib/libtorch.so \
     device/alcatel/brandy/proprietary/bin/rmt_storage:system/bin/rmt_storage \
     device/alcatel/brandy/proprietary/bin/sd_test:system/bin/sd_test \
     device/alcatel/brandy/proprietary/etc/vold.fstab:/system/etc/vold.fstab
