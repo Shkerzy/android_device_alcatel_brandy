@@ -53,7 +53,7 @@ PRODUCT_PACKAGES += \
     libOmxVidEnc \
     copybit.brandy \
     gralloc.brandy \
-    sensors.brandy \
+    lights.brandy \
     gps.brandy \
     apversion
 
@@ -228,7 +228,6 @@ PRODUCT_COPY_FILES += \
 
 # hw libs
 PRODUCT_COPY_FILES += \
-    device/alcatel/brandy/proprietary/lib/hw/lights.msm7k.so:system/lib/hw/lights.msm7k.so \
     device/alcatel/brandy/proprietary/lib/hw/sensors.msm7k.so:system/lib/hw/sensors.msm7k.so
 
 # Keys
@@ -236,7 +235,6 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/keys/7k_ffa_keypad.kcm.bin:/system/usr/keychars/7k_ffa_keypad.kcm.bin \
     device/alcatel/brandy/proprietary/keys/7k_ffa_keypad.kl:/system/usr/keylayout/7k_ffa_keypad.kl \
     device/alcatel/brandy/proprietary/keys/7k_handset.kl:/system/usr/keylayout/7k_handset.kl \
-    device/alcatel/brandy/proprietary/keys/isdm_KeypadLayout.kl:/system/usr/keylayout/isdm_KeypadLayout.kl \
     device/alcatel/brandy/proprietary/keys/qwerty.kl:/system/usr/keylayout/qwerty.kl
 
 # sh scripts
@@ -258,7 +256,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
     wifi.supplicant_scan_interval=120 \
     ro.com.android.dataroaming=false \
     ro.telephony.default_network=0 \
-    gsm.version.baseband=6180 \
     ro.com.google.clientidbase=android-alcatel \
     ro.com.google.clientidbase.ms=android-alcatel \
     ro.com.google.clientidbase.gmm=android-alcatel \
