@@ -45,7 +45,6 @@ loglevel 3
     mkdir /custpack
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /persist 0771 system system
     mkdir /cache 0771 system cache
     mkdir /config 0500 root root
 
@@ -102,7 +101,6 @@ on fs
     mount yaffs2 mtd@system /system
     #mount yaffs2 mtd@system /system ro remount
     mount yaffs2 mtd@userdata /data nosuid nodev
-    mount yaffs2 mtd@persist /persist nosuid nodev
     mount yaffs2 mtd@cache /cache nosuid nodev
 
     setprop keyguard.no_require_sim 1
@@ -188,8 +186,6 @@ on post-fs
     mkdir /data/local/tmp 0771 shell shell
     mkdir /data/local/download 0771 system cache
     mkdir /data/local/bsci 0777 shell shell
-    mkdir /data/local/sqlite_stmt_journals 01777 root root
-    mount tmpfs tmpfs /data/local/sqlite_stmt_journals size=2m
     mkdir /data/data 0771 system system
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
@@ -198,11 +194,6 @@ on post-fs
 
     mkdir /cache/download 0771 system cache
 
-    chmod 0777 /dev/bma222
-    chmod 0777 /dev/akm8975_aot
-    chmod 0777 /dev/akm8975_dev
-    chmod 0777 /dev/taos
-    chmod 0777 /dev/sd_test
     chmod 0777 /system/bin/sd_test
     chmod 0777 /data/local/bsci
 
@@ -329,7 +320,6 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown system system /sys/devices/platform/flash_led/led
     chmod 0777 /sys/class/leds/keyboard-backlight/brightness
-    write /sys/class/leds/keyboard-backlight/brightness 255
 
     chown root radio /proc/cmdline
 
