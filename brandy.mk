@@ -55,7 +55,8 @@ PRODUCT_PACKAGES += \
     gralloc.brandy \
     lights.brandy \
     gps.brandy \
-    apversion
+    apversion \
+    bdaddr_read
 
 
 PRODUCT_COPY_FILES += \
