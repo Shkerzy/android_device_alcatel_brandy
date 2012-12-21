@@ -486,9 +486,6 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
-service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
-    oneshot
-
 service wifi_macaddr /system/bin/nvcmd 0 4678 6 /system/wlan/broadcom/macaddr --format=le
     oneshot
 
@@ -501,3 +498,9 @@ on device-removed-/dev/akm8975_dev
     stop akmd8975
 
 service akmd8975 /system/bin/akmd8975
+
+service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
+    oneshot
+
+service bdaddr_read  /system/bin/bdaddr_read
+    oneshot
