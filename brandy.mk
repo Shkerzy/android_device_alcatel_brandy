@@ -239,6 +239,7 @@ PRODUCT_COPY_FILES += \
 
 # sh scripts
 PRODUCT_COPY_FILES += \
+    device/alcatel/brandy/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/alcatel/brandy/proprietary/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     device/alcatel/brandy/proprietary/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     device/alcatel/brandy/proprietary/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
