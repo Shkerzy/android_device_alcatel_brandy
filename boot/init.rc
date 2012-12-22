@@ -503,4 +503,3 @@ service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
     oneshot
 
 service bdaddr_read  /system/bin/bdaddr_read
-    oneshot
