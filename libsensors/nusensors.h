@@ -51,7 +51,7 @@ int init_nusensors(hw_module_t const* module, hw_device_t** device);
 
 /*****************************************************************************/
 
-#define AKM_DEVICE_NAME     "/dev/akm8973_aot"
+#define AKM_DEVICE_NAME     "/dev/akm8975_aot"
 #define TAOS_DEVICE_NAME      "/dev/taos"
 
 #define EVENT_TYPE_ACCEL_X          ABS_Y
@@ -73,7 +73,8 @@ int init_nusensors(hw_module_t const* module, hw_device_t** device);
 #define EVENT_TYPE_LIGHT            ABS_X
 #define EVENT_TYPE_PROXIMITY        ABS_Y
 
-#define LSG                         (700.0f)
+// 720 LSG = 1G
+#define LSG                         (720.0f)
 
 
 // conversion of acceleration data to SI units (m/s^2)
