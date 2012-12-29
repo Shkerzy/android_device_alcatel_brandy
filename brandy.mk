@@ -270,7 +270,6 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     VisualizationWallpapers \
     MagicSmokeWallpapers \
-    VisualizationWallpapers \
     librs_jni \
     Gallery3d \
     SpareParts \
