@@ -58,6 +58,24 @@ BOARD_EGL_CFG := device/alcatel/brandy/egl.cfg
 
 TARGET_PREBUILT_KERNEL := device/alcatel/brandy/kernel
 
+# # cat /proc/mtd
+# dev:     size   erasesize  name
+# mtd0:  005c0000 00020000 "boot"
+# mtd1:  03c00000 00020000 "cache"
+# mtd2:  00500000 00020000 "recovery"
+# mtd3:  000c0000 00020000 "splash"
+# mtd4:  00040000 00020000 "misc"
+# mtd5:  05f00000 00020000 "system"
+# mtd6:  07300000 00020000 "custpack"
+# mtd7:  09e60000 00020000 "userdata"
+# mtd8:  00080000 00020000 "securo"
+# mtd9:  00080000 00020000 "studypara"
+# mtd10: 00080000 00020000 "tracability"
+# mtd11: 000a0000 00020000 "tuningpara"
+# mtd12: 1bae0000 00020000 ""
+# mtd13: 00040000 00020000 "FOTAFLAG"
+# mtd14: 01b40000 00020000 "FOTA"
+
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x005C0000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0D200000
