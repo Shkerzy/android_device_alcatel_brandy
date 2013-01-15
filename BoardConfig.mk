@@ -120,4 +120,9 @@ WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/wlan/broadcom/fw_bcm4329.bin nv
 WIFI_DRIVER_MODULE_NAME := "bcm4329"
 WIFI_SDIO_IF_DRIVER_MODULE_ARG := ""
 
+# Recovery
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_ui.c
+TARGET_RECOVERY_INITRC := device/alcatel/brandy/recovery/init.rc
+BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
+
 DISABLE_DEXPREOPT := true
