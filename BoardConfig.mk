@@ -118,7 +118,8 @@ WIFI_DRIVER_FW_STA_PATH := "/system/wlan/broadcom/fw_bcm4329.bin"
 WIFI_DRIVER_FW_AP_PATH := "/system/wlan/broadcom/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/wlan/broadcom/fw_bcm4329.bin nvram_path=/system/wlan/broadcom/nvram.txt"
 WIFI_DRIVER_MODULE_NAME := "bcm4329"
-WIFI_SDIO_IF_DRIVER_MODULE_ARG := ""
+WIFI_EXT_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
+WIFI_EXT_MODULE_NAME := "librasdioif"
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_ui.c
