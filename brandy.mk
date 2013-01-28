@@ -241,8 +241,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/alcatel/brandy/proprietary/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/alcatel/brandy/proprietary/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
-    device/alcatel/brandy/proprietary/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     device/alcatel/brandy/proprietary/etc/init.baseband_version.sh:system/etc/init.baseband_version.sh
 
 PRODUCT_LOCALES += mdpi
