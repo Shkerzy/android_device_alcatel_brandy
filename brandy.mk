@@ -81,12 +81,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/modules/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/alcatel/brandy/proprietary/lib/modules/librasdioif.ko:system/lib/modules/librasdioif.ko \
-    device/alcatel/brandy/proprietary/wlan/broadcom/fw_bcm4329.bin:/system/wlan/broadcom/fw_bcm4329.bin \
-    device/alcatel/brandy/proprietary/wlan/broadcom/fw_bcm4329_apsta.bin:/system/wlan/broadcom/fw_bcm4329_apsta.bin \
-    device/alcatel/brandy/proprietary/configs/nvram.txt:/system/wlan/broadcom/nvram.txt \
-    device/alcatel/brandy/proprietary/configs/wpa_supplicant.conf:/system/wlan/broadcom/wpa_supplicant.conf \
-    device/alcatel/brandy/proprietary/configs/dhcpcd.conf:/system/etc/dhcpcd/dhcpcd.conf \
-    device/alcatel/brandy/proprietary/configs/wifi.conf:/system/etc/wifi.conf
+    device/alcatel/brandy/proprietary/wlan/broadcom/fw_bcm4329.bin:/system/etc/wifi/fw_bcm4329.bin \
+    device/alcatel/brandy/proprietary/wlan/broadcom/fw_bcm4329_apsta.bin:/system/etc/wifi/fw_bcm4329_apsta.bin \
+    device/alcatel/brandy/proprietary/configs/nvram.txt:/system/etc/wifi/nvram.txt \
+    device/alcatel/brandy/proprietary/configs/wpa_supplicant.conf:/system/etc/wifi/wpa_supplicant.conf \
+    device/alcatel/brandy/proprietary/configs/dhcpcd.conf:/system/etc/dhcpcd/dhcpcd.conf
 
 # G-Sensors, Compass and BT
 PRODUCT_COPY_FILES += \
