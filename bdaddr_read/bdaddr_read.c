@@ -4,7 +4,7 @@
 #include <cutils/log.h>
 
 #define LOG_TAG "bdaddr"
-#define BDADDR_PATH "/data/bdaddr"
+#define BDADDR_PATH "/data/misc/bdaddr"
 
 /* Read bluetooth MAC from service.brcm.bt.mac,
  * write it to BDADDR_PATH, and set ro.bt.bdaddr_path to BDADDR_PATH */

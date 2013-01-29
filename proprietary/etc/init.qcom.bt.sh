@@ -31,7 +31,7 @@ LOG_TAG="bcm-bluetooth"
 LOG_NAME="${0}:"
 
 hciattach_pid=""
-mac_addr=`cat /data/bdaddr`
+mac_addr=`cat /data/misc/bdaddr`
 
 loge ()
 {

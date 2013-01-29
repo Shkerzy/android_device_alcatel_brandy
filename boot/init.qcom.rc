@@ -1,6 +1,33 @@
+on init
+    mkdir /custpack
+
+on fs
+    mount yaffs2 mtd@system /system rw remount
+    mount yaffs2 mtd@custpack /custpack
+
+    setprop keyguard.no_require_sim 1
+
+on post-fs
+    chown system system /persist
+    chmod 0771 /persist
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
+
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+
 on boot
+    mkdir /data/local/bsci 0777 shell shell
+
+    mkdir /data/radio 0770 radio radio
+
+    chmod 0777 /system/bin/sd_test
+    chmod 0777 /data/local/bsci
+
+    chown root sdcard_rw /sys/module/diagchar/parameters/enable
+    chmod 0664 /sys/module/diagchar/parameters/enable
+
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
-    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /proc/bluetooth/sleep/proto
@@ -15,6 +42,7 @@ on boot
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
+    chown wifi wifi /data/misc/wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -41,15 +69,31 @@ on boot
 
     write /proc/sys/vm/laptop_mode 5
 
+service wifi_macaddr /system/bin/nvcmd 0 4678 6 /data/misc/macaddr --format=le
+    oneshot
+
+on device-added-/dev/akm8975_dev
+    start akmd8975
+
+on device-removed-/dev/akm8975_dev
+    stop akmd8975
+
+service akmd8975 /system/bin/akmd8975
+
+service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
+    oneshot
+
+service bdaddr_read  /system/bin/bdaddr_read
+
 service cnd /system/bin/cnd
     socket cnd stream 660 root radio
 
-service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11 /dev/block/mmcblk0p17
-    user root
-    disabled
+#service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11 /dev/block/mmcblk0p17
+#    user root
+#    disabled
 
-on property:ro.emmc=1
-    start rmt_storage
+#on property:ro.emmc=1
+#    start rmt_storage
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
@@ -64,12 +108,12 @@ service qmuxd /system/bin/qmuxd
     group radio
 #  disabled
 
-service netmgrd /system/bin/netmgrd
-    disabled
+#service netmgrd /system/bin/netmgrd
+#    disabled
 
-on property:ro.use_data_netmgrd=false
+#on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
-    stop netmgrd
+#    stop netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -94,9 +138,9 @@ service iprenew_wlan0 /system/bin/dhcpcd -n wlan0
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd_wlan0
 
-service qcom-sh /system/bin/sh /init.qcom.sh
-    user root
-    oneshot
+#service qcom-sh /system/bin/sh /init.qcom.sh
+#    user root
+#    oneshot
 
 service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     user root

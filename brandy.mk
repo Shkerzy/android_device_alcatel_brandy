@@ -66,10 +66,9 @@ PRODUCT_COPY_FILES += \
 # Boot
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/boot/ueventd.rc:root/ueventd.rc \
-    device/alcatel/brandy/boot/init.rc:root/init.rc \
     device/alcatel/brandy/boot/init.qcom.rc:root/init.qcom.rc \
-    device/alcatel/brandy/boot/init.qcom.sh:root/init.qcom.sh \
     device/alcatel/brandy/boot/initlogo.rle:root/initlogo.rle
+#    device/alcatel/brandy/boot/init.qcom.sh:root/init.qcom.sh \
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -96,7 +95,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/bin/CKPD-daemon:system/bin/CKPD-daemon \
     device/alcatel/brandy/proprietary/bin/cnd:system/bin/cnd \
-    device/alcatel/brandy/proprietary/bin/netmgrd:system/bin/netmgrd \
     device/alcatel/brandy/proprietary/bin/qmuxd:system/bin/qmuxd \
     device/alcatel/brandy/proprietary/bin/port-bridge:system/bin/port-bridge \
     device/alcatel/brandy/proprietary/bin/ds_fmc_appd:system/bin/ds_fmc_appd \
@@ -128,6 +126,7 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libwms.so:system/lib/libwms.so \
     device/alcatel/brandy/proprietary/lib/libwmsts.so:system/lib/libwmsts.so \
     device/alcatel/brandy/proprietary/etc/apns-conf.xml:system/etc/apns-conf.xml
+#    device/alcatel/brandy/proprietary/bin/netmgrd:system/bin/netmgrd \
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -217,14 +216,13 @@ PRODUCT_COPY_FILES += \
 # Mac addr
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/bin/jrd_bcm4329_mac:system/bin/jrd_bcm4329_mac \
-    device/alcatel/brandy/proprietary/bin/nvcmd:system/bin/nvcmd \
-    device/alcatel/brandy/proprietary/wlan/broadcom/macaddr:system/wlan/broadcom/macaddr
+    device/alcatel/brandy/proprietary/bin/nvcmd:system/bin/nvcmd
 
 # various files
 PRODUCT_COPY_FILES += \
-    device/alcatel/brandy/proprietary/bin/rmt_storage:system/bin/rmt_storage \
     device/alcatel/brandy/proprietary/bin/sd_test:system/bin/sd_test \
     device/alcatel/brandy/proprietary/etc/vold.fstab:/system/etc/vold.fstab
+#    device/alcatel/brandy/proprietary/bin/rmt_storage:system/bin/rmt_storage
 
 # hw libs
 PRODUCT_COPY_FILES += \
