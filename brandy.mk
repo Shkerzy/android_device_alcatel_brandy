@@ -66,7 +66,7 @@ PRODUCT_COPY_FILES += \
 # Boot
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/boot/ueventd.rc:root/ueventd.rc \
-    device/alcatel/brandy/boot/init.qcom.rc:root/init.qcom.rc \
+    device/alcatel/brandy/boot/init.brandy.rc:root/init.brandy.rc \
     device/alcatel/brandy/boot/initlogo.rle:root/initlogo.rle
 #    device/alcatel/brandy/boot/init.qcom.sh:root/init.qcom.sh \
 
@@ -93,11 +93,9 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_COPY_FILES += \
-    device/alcatel/brandy/proprietary/bin/CKPD-daemon:system/bin/CKPD-daemon \
     device/alcatel/brandy/proprietary/bin/cnd:system/bin/cnd \
     device/alcatel/brandy/proprietary/bin/qmuxd:system/bin/qmuxd \
     device/alcatel/brandy/proprietary/bin/port-bridge:system/bin/port-bridge \
-    device/alcatel/brandy/proprietary/bin/ds_fmc_appd:system/bin/ds_fmc_appd \
     device/alcatel/brandy/proprietary/lib/libauth.so:system/lib/libauth.so \
     device/alcatel/brandy/proprietary/lib/libcm.so:system/lib/libcm.so \
     device/alcatel/brandy/proprietary/lib/libdiag.so:system/lib/libdiag.so \
@@ -108,7 +106,6 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libgstk_exp.so:system/lib/libgstk_exp.so \
     device/alcatel/brandy/proprietary/lib/libidl.so:system/lib/libidl.so \
     device/alcatel/brandy/proprietary/lib/libmmgsdilib.so:system/lib/libmmgsdilib.so \
-    device/alcatel/brandy/proprietary/lib/libnetmgr.so:system/lib/libnetmgr.so \
     device/alcatel/brandy/proprietary/lib/libnv.so:system/lib/libnv.so \
     device/alcatel/brandy/proprietary/lib/liboem_rapi.so:system/lib/liboem_rapi.so \
     device/alcatel/brandy/proprietary/lib/liboncrpc.so:system/lib/liboncrpc.so \
@@ -126,16 +123,9 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libwms.so:system/lib/libwms.so \
     device/alcatel/brandy/proprietary/lib/libwmsts.so:system/lib/libwmsts.so \
     device/alcatel/brandy/proprietary/etc/apns-conf.xml:system/etc/apns-conf.xml
-#    device/alcatel/brandy/proprietary/bin/netmgrd:system/bin/netmgrd \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    device/alcatel/brandy/proprietary/lib/libcommondefs.so:obj/lib/libcommondefs.so \
-    device/alcatel/brandy/proprietary/lib/libcommondefs.so:system/lib/libcommondefs.so \
-    device/alcatel/brandy/proprietary/bin/loc_api_app:system/bin/loc_api_app \
-    device/alcatel/brandy/proprietary/lib/libgps.so:system/lib/libgps.so \
-    device/alcatel/brandy/proprietary/lib/libloc-rpc.so:system/lib/libloc-rpc.so \
-    device/alcatel/brandy/proprietary/lib/libloc_ext.so:system/lib/libloc_ext.so \
     device/alcatel/brandy/proprietary/etc/gps.conf:/system/etc/gps.conf
 
 # OMX
@@ -222,7 +212,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/bin/sd_test:system/bin/sd_test \
     device/alcatel/brandy/proprietary/etc/vold.fstab:/system/etc/vold.fstab
-#    device/alcatel/brandy/proprietary/bin/rmt_storage:system/bin/rmt_storage
 
 # hw libs
 PRODUCT_COPY_FILES += \
@@ -257,7 +246,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.com.google.clientidbase.ms=android-alcatel \
     ro.com.google.clientidbase.gmm=android-alcatel \
     ro.com.google.clientidbase.am=android-alcatel \
-    ro.com.google.clientidbase.yt=android-alcatel
+    ro.com.google.clientidbase.yt=android-alcatel \
+    ro.com.google.gmsversion=2.3_r9 \
 
 
 PRODUCT_PACKAGES += \
@@ -268,7 +258,6 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Gallery3d \
     SpareParts \
-    Development \
     Term \
     Stk \
     Torch
@@ -279,4 +268,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := brandy
 PRODUCT_DEVICE := brandy
 PRODUCT_MODEL := ALCATEL ONE TOUCH 990
-PRODUCT_BRAND := TCT
+PRODUCT_BRAND := Alcatel
+PRODUCT_MANUFACTURER := TCT

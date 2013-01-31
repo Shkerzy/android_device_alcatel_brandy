@@ -53,7 +53,7 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_KERNEL_BASE    := 0x13600000
 BOARD_KERNEL_PAGESIZE := 2048
 
-BOARD_KERNEL_CMDLINE := mem=458M console=ttyMSM2,115200n8 androidboot.hardware=qcom
+BOARD_KERNEL_CMDLINE := mem=458M console=ttyMSM2,115200n8 androidboot.hardware=brandy
 BOARD_EGL_CFG := device/alcatel/brandy/egl.cfg
 
 TARGET_PREBUILT_KERNEL := device/alcatel/brandy/kernel

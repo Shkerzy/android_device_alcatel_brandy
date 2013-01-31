@@ -88,13 +88,6 @@ service bdaddr_read  /system/bin/bdaddr_read
 service cnd /system/bin/cnd
     socket cnd stream 660 root radio
 
-#service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11 /dev/block/mmcblk0p17
-#    user root
-#    disabled
-
-#on property:ro.emmc=1
-#    start rmt_storage
-
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin
@@ -107,13 +100,6 @@ service qmuxd /system/bin/qmuxd
     user radio
     group radio
 #  disabled
-
-#service netmgrd /system/bin/netmgrd
-#    disabled
-
-#on property:ro.use_data_netmgrd=false
-    # netmgr not supported on specific target
-#    stop netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -155,20 +141,3 @@ service baseband-sh /system/bin/sh /system/etc/init.baseband_version.sh
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
     start baseband-sh
-
-service ckpd /system/bin/CKPD-daemon
-    user system
-    group system radio
-    disabled
-    onrestart /system/bin/log -t RIL-CKPD -p w "CKPD daemon restarted"
-
-on property:ro.service.ckpd.enable=1
-    start ckpd
-
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    group radio
-    disabled
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
