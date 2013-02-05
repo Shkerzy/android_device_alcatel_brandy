@@ -206,8 +206,11 @@ static void dispatchCdmaSmsAck(Parcel &p, RequestInfo *pRI);
 static void dispatchGsmBrSmsCnf(Parcel &p, RequestInfo *pRI);
 static void dispatchCdmaBrSmsCnf(Parcel &p, RequestInfo *pRI);
 static void dispatchRilCdmaSmsWriteArgs(Parcel &p, RequestInfo *pRI);
+static void dispatchNetworkManual (Parcel& p, RequestInfo *pRI);
 static int responseInts(Parcel &p, void *response, size_t responselen);
 static int responseStrings(Parcel &p, void *response, size_t responselen);
+static int responseStringsNetworks(Parcel &p, void *response, size_t responselen);
+static int responseStrings(Parcel &p, void *response, size_t responselen, bool network_search);
 static int responseString(Parcel &p, void *response, size_t responselen);
 static int responseVoid(Parcel &p, void *response, size_t responselen);
 static int responseCallList(Parcel &p, void *response, size_t responselen);
@@ -239,11 +242,9 @@ extern "C" void RIL_onUnsolicitedResponse(int unsolResponse, void *data,
 #endif
 
 static UserCallbackInfo * internalRequestTimedCallback
-    (RIL_TimedCallback callback, void *param,
-        const struct timeval *relativeTime);
+    (RIL_TimedCallback callback, void *param, const struct timeval *relativeTime);
 
-static void internalRemoveTimedCallback
-    (void *index);
+static void internalRemoveTimedCallback(void *callbackInfo);
 
 /** Index == requestNumber */
 static CommandInfo s_commands[] = {
@@ -467,6 +468,45 @@ invalid:
     return;
 }
 
+/** Callee expects const char * */
+static void
+dispatchNetworkManual (Parcel& p, RequestInfo *pRI) {
+    status_t status;
+    size_t datalen;
+    char **pStrings;
+
+    datalen = sizeof(char *) * 2;
+
+    startRequest;
+    pStrings = (char **)alloca(datalen);
+
+    pStrings[0] = strdupReadString(p);
+    appendPrintBuf("%s%s,", printBuf, pStrings[0]);
+    pStrings[1] = strdup("NOCHANGE");
+    closeRequest;
+    printRequest(pRI->token, pRI->pCI->requestNumber);
+
+    s_callbacks.onRequest(pRI->pCI->requestNumber, pStrings, datalen, pRI);
+
+    if (pStrings != NULL) {
+        for (int i = 0 ; i < 2 ; i++) {
+#ifdef MEMSET_FREED
+            memsetString (pStrings[i]);
+#endif
+            free(pStrings[i]);
+        }
+
+#ifdef MEMSET_FREED
+        memset(pStrings, 0, datalen);
+#endif
+    }
+
+    return;
+invalid:
+    invalidCommandBlock(pRI);
+    return;
+}
+
 /** Callee expects const int * */
 static void
 dispatchInts (Parcel &p, RequestInfo *pRI) {
@@ -489,6 +529,13 @@ dispatchInts (Parcel &p, RequestInfo *pRI) {
         int32_t t;
 
         status = p.readInt32(&t);
+        /* libril-qc apparently only supports SERVICE_NONE here */
+        if (pRI->pCI->requestNumber == RIL_REQUEST_QUERY_CALL_WAITING)
+            pInts[i] = 0;
+        else if (pRI->pCI->requestNumber == RIL_REQUEST_SET_CALL_WAITING &&
+                    i == 1)
+            pInts[i] = 0;
+        else
         pInts[i] = (int)t;
         appendPrintBuf("%s%d,", printBuf, t);
 
@@ -1286,8 +1333,16 @@ responseInts(Parcel &p, void *response, size_t responselen) {
     return 0;
 }
 
-/** response is a char **, pointing to an array of char *'s */
 static int responseStrings(Parcel &p, void *response, size_t responselen) {
+    return responseStrings(p, response, responselen, false);
+}
+
+static int responseStringsNetworks(Parcel &p, void *response, size_t responselen) {
+    return responseStrings(p, response, responselen, true);
+}
+
+/** response is a char **, pointing to an array of char *'s */
+static int responseStrings(Parcel &p, void *response, size_t responselen, bool network_search) {
     int numStrings;
 
     if (response == NULL && responselen != 0) {
@@ -1306,11 +1361,23 @@ static int responseStrings(Parcel &p, void *response, size_t responselen) {
         char **p_cur = (char **) response;
 
         numStrings = responselen / sizeof(char *);
-        p.writeInt32 (numStrings);
+        if (network_search == true) {
+            // we only want four entries for each network
+            p.writeInt32 (numStrings - (numStrings / 5));
+        } else {
+            p.writeInt32 (numStrings);
+        }
+        int sCount = 0;
 
         /* each string*/
         startResponse;
         for (int i = 0 ; i < numStrings ; i++) {
+            sCount++;
+            // ignore the fifth string that is returned by newer qcom RIL implementations
+            if (network_search == true && sCount % 5 == 0) {
+                sCount = 0;
+                continue;
+            }
             appendPrintBuf("%s%s,", printBuf, (char*)p_cur[i]);
             writeStringToParcel (p, p_cur[i]);
         }
@@ -1663,21 +1730,8 @@ static int responseCdmaInformationRecords(Parcel &p,
         infoRec = &p_cur->infoRec[i];
         p.writeInt32(infoRec->name);
         switch (infoRec->name) {
-            case RIL_CDMA_EXTENDED_DISPLAY_INFO_REC:
-                if (infoRec->rec.display.alpha_len >
-                                         CDMA_ALPHA_INFO_BUFFER_LENGTH) {
-                    LOGE("invalid display info response length %d \
-                          expected not more than %d\n",
-                         (int)infoRec->rec.display.alpha_len,
-                         CDMA_ALPHA_INFO_BUFFER_LENGTH);
-                    return RIL_ERRNO_INVALID_RESPONSE;
-                }
-                // Write as a byteArray
-                p.writeInt32(infoRec->rec.display.alpha_len);
-                p.write(infoRec->rec.display.alpha_buf,
-                        infoRec->rec.display.alpha_len);
-                break;
             case RIL_CDMA_DISPLAY_INFO_REC:
+            case RIL_CDMA_EXTENDED_DISPLAY_INFO_REC:
                 if (infoRec->rec.display.alpha_len >
                                          CDMA_ALPHA_INFO_BUFFER_LENGTH) {
                     LOGE("invalid display info response length %d \
@@ -2254,7 +2308,7 @@ static void listenCallback (int fd, short flags, void *param) {
         LOGE("Error on accept() errno:%d", errno);
         /* start listening for new connections again */
         rilEventAddWakeup(&s_listen_event);
-	      return;
+        return;
     }
 
     /* check the credential of the other side and only accept socket from
@@ -2387,12 +2441,12 @@ static void debugCallback (int fd, short flags, void *param) {
             break;
         case 3:
             LOGI ("Debug port: QXDM log enable.");
-            qxdm_data[0] = 65536;
-            qxdm_data[1] = 16;
-            qxdm_data[2] = 1;
-            qxdm_data[3] = 32;
-            qxdm_data[4] = 0;
-            qxdm_data[4] = 8;
+            qxdm_data[0] = 65536;     // head.func_tag
+            qxdm_data[1] = 16;        // head.len
+            qxdm_data[2] = 1;         // mode: 1 for 'start logging'
+            qxdm_data[3] = 32;        // log_file_size: 32megabytes
+            qxdm_data[4] = 0;         // log_mask
+            qxdm_data[5] = 8;         // log_max_fileindex
             issueLocalRequest(RIL_REQUEST_OEM_HOOK_RAW, qxdm_data,
                               6 * sizeof(int));
             break;
@@ -2400,10 +2454,10 @@ static void debugCallback (int fd, short flags, void *param) {
             LOGI ("Debug port: QXDM log disable.");
             qxdm_data[0] = 65536;
             qxdm_data[1] = 16;
-            qxdm_data[2] = 0;
+            qxdm_data[2] = 0;          // mode: 0 for 'stop logging'
             qxdm_data[3] = 32;
             qxdm_data[4] = 0;
-            qxdm_data[4] = 8;
+            qxdm_data[5] = 8;
             issueLocalRequest(RIL_REQUEST_OEM_HOOK_RAW, qxdm_data,
                               6 * sizeof(int));
             break;
@@ -2904,41 +2958,26 @@ internalRequestTimedCallback (RIL_TimedCallback callback, void *param,
 }
 
 static void
-internalRemoveTimedCallback(void *ptr)
+internalRemoveTimedCallback(void *callbackInfo)
 {
     UserCallbackInfo *p_info;
-    struct ril_event *list;
-    struct ril_event *curr_ptr;
-
-    curr_ptr = (struct ril_event *)ril_timer_list();
-    list = curr_ptr->next;
-
-    if(list == NULL) {
-        return;
-    }
-
-    while(list != curr_ptr) {
-
-        p_info = (UserCallbackInfo *)list->param;
-        list = list->next;
-
-        if((int )(p_info->userParam) == (int)ptr) {
-            ril_timer_delete(&(p_info->event));
-            free(p_info);
-            break;
-        }
+    p_info = (UserCallbackInfo *)callbackInfo;
+    LOGI("remove timer callback event");
+    if(p_info) {
+        if (ril_timer_delete(&(p_info->event)))
+			free(p_info);
     }
 }
 
-extern "C" void
+extern "C" void *
 RIL_requestTimedCallback (RIL_TimedCallback callback, void *param,
                                 const struct timeval *relativeTime) {
-    internalRequestTimedCallback (callback, param, relativeTime);
+   return internalRequestTimedCallback (callback, param, relativeTime);
 }
 
 extern "C" void
-RIL_removeTimedCallback ( void *token_id) {
-    internalRemoveTimedCallback(token_id);
+RIL_removeTimedCallback (void *callbackInfo) {
+    internalRemoveTimedCallback(callbackInfo);
 }
 
 const char *
@@ -3107,6 +3146,7 @@ requestToString(int request) {
         case RIL_REQUEST_GET_SMSC_ADDRESS: return "GET_SMSC_ADDRESS";
         case RIL_REQUEST_SET_SMSC_ADDRESS: return "SET_SMSC_ADDRESS";
         case RIL_REQUEST_REPORT_SMS_MEMORY_STATUS: return "REPORT_SMS_MEMORY_STATUS";
+        case RIL_REQUEST_REPORT_STK_SERVICE_IS_RUNNING: return "REPORT_STK_SERVICE_IS_RUNNING";
         case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED: return "UNSOL_RESPONSE_RADIO_STATE_CHANGED";
         case RIL_UNSOL_RESPONSE_CALL_STATE_CHANGED: return "UNSOL_RESPONSE_CALL_STATE_CHANGED";
         case RIL_UNSOL_RESPONSE_NETWORK_STATE_CHANGED: return "UNSOL_RESPONSE_NETWORK_STATE_CHANGED";
