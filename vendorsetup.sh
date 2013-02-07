@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_lunch_combo brandy-eng
+add_lunch_combo cyanogen_brandy-eng
