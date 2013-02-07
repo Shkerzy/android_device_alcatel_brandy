@@ -68,7 +68,6 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/boot/ueventd.rc:root/ueventd.rc \
     device/alcatel/brandy/boot/init.brandy.rc:root/init.brandy.rc \
     device/alcatel/brandy/boot/initlogo.rle:root/initlogo.rle
-#    device/alcatel/brandy/boot/init.qcom.sh:root/init.qcom.sh \
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -99,30 +98,22 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libauth.so:system/lib/libauth.so \
     device/alcatel/brandy/proprietary/lib/libcm.so:system/lib/libcm.so \
     device/alcatel/brandy/proprietary/lib/libdiag.so:system/lib/libdiag.so \
+    device/alcatel/brandy/proprietary/lib/libdll.so:system/lib/libdll.so \
     device/alcatel/brandy/proprietary/lib/libdsm.so:system/lib/libdsm.so \
     device/alcatel/brandy/proprietary/lib/libdss.so:system/lib/libdss.so \
-    device/alcatel/brandy/proprietary/lib/libdsutils.so:system/lib/libdsutils.so \
     device/alcatel/brandy/proprietary/lib/libgsdi_exp.so:system/lib/libgsdi_exp.so \
     device/alcatel/brandy/proprietary/lib/libgstk_exp.so:system/lib/libgstk_exp.so \
-    device/alcatel/brandy/proprietary/lib/libidl.so:system/lib/libidl.so \
     device/alcatel/brandy/proprietary/lib/libmmgsdilib.so:system/lib/libmmgsdilib.so \
     device/alcatel/brandy/proprietary/lib/libnv.so:system/lib/libnv.so \
-    device/alcatel/brandy/proprietary/lib/liboem_rapi.so:system/lib/liboem_rapi.so \
     device/alcatel/brandy/proprietary/lib/liboncrpc.so:system/lib/liboncrpc.so \
     device/alcatel/brandy/proprietary/lib/libpbmlib.so:system/lib/libpbmlib.so \
     device/alcatel/brandy/proprietary/lib/libqmi.so:system/lib/libqmi.so \
     device/alcatel/brandy/proprietary/lib/libqueue.so:system/lib/libqueue.so \
     device/alcatel/brandy/proprietary/lib/libril-qc-1.so:/system/lib/libril-qc-1.so \
     device/alcatel/brandy/proprietary/lib/libril-qcril-hook-oem.so:/system/lib/libril-qcril-hook-oem.so \
-    device/alcatel/brandy/proprietary/lib/libsnd.so:system/lib/libsnd.so \
     device/alcatel/brandy/proprietary/lib/libwms.so:system/lib/libwms.so \
     device/alcatel/brandy/proprietary/lib/libwmsts.so:system/lib/libwmsts.so \
     device/alcatel/brandy/proprietary/etc/apns-conf.xml:system/etc/apns-conf.xml
-#    device/alcatel/brandy/proprietary/lib/libpdapi.so:system/lib/libpdapi.so \
-#    device/alcatel/brandy/proprietary/lib/libpdsm_atl.so:system/lib/libpdsm_atl.so \
-#    device/alcatel/brandy/proprietary/lib/libping_mdm.so:system/lib/libping_mdm.so \
-#    device/alcatel/brandy/proprietary/lib/libuim.so:system/lib/libuim.so \
-#    device/alcatel/brandy/proprietary/lib/libvoem_if.so:system/lib/libvoem_if.so \
 
 # GPS
 PRODUCT_COPY_FILES += \
