@@ -55,7 +55,6 @@ PRODUCT_PACKAGES += \
     gralloc.brandy \
     lights.brandy \
     gps.brandy \
-    apversion \
     bdaddr_read
 
 
@@ -217,8 +216,7 @@ PRODUCT_COPY_FILES += \
 # sh scripts
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    device/alcatel/brandy/proprietary/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/alcatel/brandy/proprietary/etc/init.baseband_version.sh:system/etc/init.baseband_version.sh
+    device/alcatel/brandy/proprietary/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 PRODUCT_LOCALES += mdpi
 
@@ -238,7 +236,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.com.google.clientidbase.am=android-alcatel \
     ro.com.google.clientidbase.yt=android-alcatel \
     ro.com.google.gmsversion=2.3_r9 \
-
+    gsm.version.baseband=M76XX-TSNCJOLYM-6180
 
 PRODUCT_PACKAGES += \
     LiveWallpapers \

@@ -129,11 +129,5 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     disabled
     oneshot
 
-service baseband-sh /system/bin/sh /system/etc/init.baseband_version.sh
-    user root
-    disabled
-    oneshot
-
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
-    start baseband-sh

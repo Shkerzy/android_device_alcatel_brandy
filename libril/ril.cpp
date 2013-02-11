@@ -48,6 +48,7 @@
 #include <assert.h>
 #include <netinet/in.h>
 #include <cutils/properties.h>
+#include <termios.h>
 
 #include <ril_event.h>
 
@@ -2744,6 +2745,13 @@ RIL_onRequestComplete(RIL_Token t, RIL_Errno e, void *response, size_t responsel
 
     appendPrintBuf("[%04d]< %s",
         pRI->token, requestToString(pRI->pCI->requestNumber));
+
+    if (pRI->pCI->requestNumber == RIL_REQUEST_BASEBAND_VERSION) {
+        char baseband[PROPERTY_VALUE_MAX];
+
+        property_get("gsm.version.baseband", baseband, "M76XX-TSNCJOLYM-6180");
+        response=strdup(baseband);
+    }
 
     if (pRI->cancelled == 0) {
         Parcel p;
