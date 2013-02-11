@@ -72,8 +72,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libaudioeq.so:/system/lib/libaudioeq.so \
-    device/alcatel/brandy/proprietary/etc/AudioFilter.csv:/system/etc/AudioFilter.csv \
-    device/alcatel/brandy/proprietary/lib/libaudioalsa.so:/system/lib/libaudioalsa.so
+    device/alcatel/brandy/proprietary/etc/AudioFilter.csv:/system/etc/AudioFilter.csv
 
 # WiFi
 PRODUCT_COPY_FILES += \
