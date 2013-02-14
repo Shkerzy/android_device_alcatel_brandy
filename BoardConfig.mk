@@ -53,6 +53,15 @@ WIFI_EXT_MODULE_NAME := "librasdioif"
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
+# GPS
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := brandy
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+
+# QCOM
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+
 # # cat /proc/mtd
 # dev:     size   erasesize  name
 # mtd0:  005c0000 00020000 "boot"
