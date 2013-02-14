@@ -17,6 +17,16 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
+# WiFi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/wifi/bcm4329.ko:system/lib/modules/bcm4329.ko \
+    $(LOCAL_PATH)/prebuilt/wifi/librasdioif.ko:system/lib/modules/librasdioif.ko \
+    $(LOCAL_PATH)/prebuilt/wifi/fw_bcm4329.bin:system/etc/wifi/fw_bcm4329.bin \
+    $(LOCAL_PATH)/prebuilt/wifi/fw_bcm4329_apsta.bin:system/etc/wifi/fw_bcm4329_apsta.bin \
+    $(LOCAL_PATH)/prebuilt/wifi/nvram.txt:system/etc/wifi/nvram.txt \
+    $(LOCAL_PATH)/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/prebuilt/wifi/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+
 $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

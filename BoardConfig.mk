@@ -37,6 +37,22 @@ BOARD_KERNEL_CMDLINE := mem=458M console=ttyMSM2,115200n8 androidboot.hardware=b
 BOARD_KERNEL_BASE := 0x13600000
 BOARD_KERNEL_PAGESIZE := 2048
 
+# WiFi
+WPA_SUPPLICANT_VERSION := VER_0_6_X
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+BOARD_WLAN_DEVICE := bcm4329
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcm4329.ko"
+WIFI_DRIVER_FW_PATH_STA := "/system/etc/wifi/fw_bcm4329.bin"
+WIFI_DRIVER_FW_PATH_AP := "/system/etc/wifi/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/fw_bcm4329.bin nvram_path=/system/etc/wifi/nvram.txt"
+WIFI_DRIVER_MODULE_NAME := "bcm4329"
+WIFI_EXT_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
+WIFI_EXT_MODULE_NAME := "librasdioif"
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
 # # cat /proc/mtd
 # dev:     size   erasesize  name
 # mtd0:  005c0000 00020000 "boot"
