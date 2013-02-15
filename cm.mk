@@ -17,7 +17,7 @@ $(call inherit-product, device/alcatel/brandy/brandy.mk)
 PRODUCT_DEVICE := brandy
 PRODUCT_NAME := cm_brandy
 PRODUCT_BRAND := Alcatel
-PRODUCT_MODEL := brandy
+PRODUCT_MODEL := ALCATEL ONE TOUCH 990
 PRODUCT_MANUFACTURER := TCT
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
