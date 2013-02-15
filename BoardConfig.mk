@@ -62,6 +62,13 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 
+# Graphics
+BOARD_EGL_CFG := $(LOCAL_PATH)/prebuilt/egl.cfg
+
+# Recovery
+TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/init.rc
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_keys.c
+
 # # cat /proc/mtd
 # dev:     size   erasesize  name
 # mtd0:  005c0000 00020000 "boot"
