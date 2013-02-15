@@ -63,11 +63,12 @@ BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 
 # Graphics
-BOARD_EGL_CFG := $(LOCAL_PATH)/prebuilt/egl.cfg
+BOARD_EGL_CFG := device/alcatel/brandy/prebuilt/egl.cfg
 
 # Recovery
-TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/init.rc
+TARGET_RECOVERY_INITRC := device/alcatel/brandy/recovery/init.rc
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_keys.c
+BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
 # # cat /proc/mtd
 # dev:     size   erasesize  name
