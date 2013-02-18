@@ -96,7 +96,8 @@ PRODUCT_PACKAGES += \
 # Misc
 PRODUCT_PACKAGES += \
     gps.brandy \
-    lights.msm7x27
+    lights.msm7x27 \
+    bdaddr_read
 
 # Media
 PRODUCT_PACKAGES += \
