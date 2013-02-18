@@ -3,6 +3,13 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# OMX
+$(call inherit-product, vendor/qcom/opensource/omx/mm-core/Android.mk)
+$(call inherit-product, vendor/qcom/opensource/omx/mm-video/Android.mk)
+$(call inherit-product, vendor/qcom/opensource/omx/mm-audio/Android.mk)
+
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+
 $(call inherit-product-if-exists, vendor/alcatel/brandy/brandy-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/alcatel/brandy/overlay
@@ -64,6 +71,35 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/nvram.txt:system/etc/wifi/nvram.txt \
     $(LOCAL_PATH)/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/prebuilt/wifi/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio_policy.msm7x27 \
+    audio.primary.msm7x27 \
+    audio.a2dp.default \
+    libaudioutils
+
+# Display
+PRODUCT_PACKAGES += \
+    libgenlock \
+    liboverlay \
+    libtilerenderer \
+    libopencorehw \
+    gralloc.msm7x27 \
+    copybit.msm7x27 \
+    hwcomposer.msm7x27
+
+# Misc
+PRODUCT_PACKAGES += \
+    gps.brandy \
+    lights.msm7x27
+
+# Media
+PRODUCT_PACKAGES += \
+    libmm-omxcore \
+    libOmxCore \
+    libstagefrighthw \
+    libdivxdrmdecrypt
 
 $(call inherit-product, build/target/product/full.mk)
 
