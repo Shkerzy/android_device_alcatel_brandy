@@ -24,6 +24,10 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.brandy.rc:root/init.brandy.rc \
+    $(LOCAL_PATH)/ueventd.brandy.rc:root/ueventd.brandy.rc
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
