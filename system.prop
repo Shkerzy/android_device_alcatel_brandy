@@ -18,6 +18,7 @@ persist.rild.nitz_short_ons_3=
 wifi.interface=wlan0
 
 # Graphics
+com.qc.hardware=true
 ro.sf.lcd_density=160
 ro.opengles.version=131072
 
