@@ -26,7 +26,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.brandy.rc:root/init.brandy.rc \
-    $(LOCAL_PATH)/ueventd.brandy.rc:root/ueventd.brandy.rc
+    $(LOCAL_PATH)/ueventd.brandy.rc:root/ueventd.brandy.rc \
+    $(LOCAL_PATH)/prebuilt/initlogo.rle:root/initlogo.rle
 
 # Permissions
 PRODUCT_COPY_FILES += \
