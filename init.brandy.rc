@@ -113,9 +113,7 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
 
 service qmuxd /system/bin/qmuxd
-    user radio
-    group radio
-#  disabled
+    class main
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
