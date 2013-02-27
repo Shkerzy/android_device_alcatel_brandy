@@ -112,11 +112,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-flags=m=y
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
     com.qc.hdmi_out=false \
     debug.sf.hw=1 \
     debug.enabletr=false \
-    debug.composition.type=mdp \
+    debug.composition.type=gpu \
     debug.gr.numframebuffers=2 \
     debug.qctwa.statusbar=1 \
     debug.qctwa.preservebuf=1 \
