@@ -87,6 +87,7 @@ TARGET_FORCE_CPU_UPLOAD := true
 
 # Libs
 TARGET_PROVIDES_LIBLIGHTS := true
+BOARD_PROVIDES_LIBRIL := true
 
 # Recovery
 TARGET_RECOVERY_INITRC := device/alcatel/brandy/recovery/init.rc
