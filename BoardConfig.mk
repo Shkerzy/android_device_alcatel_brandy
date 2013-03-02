@@ -68,9 +68,6 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_LEGACY_OMX
 BOARD_EGL_CFG := device/alcatel/brandy/prebuilt/egl.cfg
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 USE_OPENGL_RENDERER := true
-TARGET_USE_OVERLAY := false
-TARGET_HAVE_BYPASS := false
-TARGET_USES_C2D_COMPOSITION := false
 TARGET_USES_GENLOCK := true
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
 
@@ -93,6 +90,8 @@ BOARD_PROVIDES_LIBRIL := true
 TARGET_RECOVERY_INITRC := device/alcatel/brandy/recovery/init.rc
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_keys.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
+
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 
 # # cat /proc/mtd
 # dev:     size   erasesize  name
