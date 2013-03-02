@@ -100,6 +100,7 @@ service bcm4329_macaddr /system/bin/jrd_bcm4329_mac
     oneshot
 
 service bdaddr_read  /system/bin/bdaddr_read
+    oneshot
 
 service cnd /system/bin/cnd
     socket cnd stream 660 root radio
@@ -152,3 +153,6 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
+    start wifi_macaddr
+    start bcm4329_macaddr
+    start bdaddr_read
