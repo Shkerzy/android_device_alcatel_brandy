@@ -58,6 +58,8 @@ PRODUCT_COPY_FILES += \
 
 # Configs
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    $(LOCAL_PATH)/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # Keys
@@ -81,6 +83,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     audio_policy.msm7x27 \
     audio.primary.msm7x27 \
+    audio_policy.brandy \
+    audio.primary.brandy \
     audio.a2dp.default \
     libaudioutils
 
