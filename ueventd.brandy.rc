@@ -4,6 +4,7 @@
 /dev/kgsl-2d0             0666   root       root
 /dev/kgsl-2d1             0666   root       root
 /dev/genlock              0666   system     graphics
+/dev/graphics/fb0         0666   graphics   graphics
 
 /dev/ttyHS0               0600   bluetooth  bluetooth
 /dev/oncrpc/*             0777   root       system
