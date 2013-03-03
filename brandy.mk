@@ -98,7 +98,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.brandy \
     lights.msm7x27 \
-    bdaddr_read
+    bdaddr_read \
+    CMFileManager \
+    CMFileManagerThemes
 
 # Media
 PRODUCT_PACKAGES += \
