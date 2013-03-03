@@ -60,6 +60,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     $(LOCAL_PATH)/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
+    $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # Keys
@@ -87,6 +88,10 @@ PRODUCT_PACKAGES += \
     audio.primary.brandy \
     audio.a2dp.default \
     libaudioutils
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm7x27
 
 # Display
 PRODUCT_PACKAGES += \
