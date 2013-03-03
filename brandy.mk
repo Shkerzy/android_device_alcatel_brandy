@@ -82,8 +82,6 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio_policy.msm7x27 \
-    audio.primary.msm7x27 \
     audio_policy.brandy \
     audio.primary.brandy \
     audio.a2dp.default \
