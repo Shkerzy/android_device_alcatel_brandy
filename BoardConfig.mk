@@ -89,6 +89,7 @@ BOARD_PROVIDES_LIBRIL := true
 # Recovery
 TARGET_RECOVERY_INITRC := device/alcatel/brandy/recovery/init.rc
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/alcatel/brandy/recovery/recovery_keys.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/alcatel/brandy/recovery/graphics.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
