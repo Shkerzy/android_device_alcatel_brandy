@@ -1,3 +1,5 @@
+import init.brandy.usb.rc
+
 on init
 # setup the global environment
     export DOWNLOAD_CACHE /cache/download

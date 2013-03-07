@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.brandy.rc:root/init.brandy.rc \
+    $(LOCAL_PATH)/init.brandy.usb.rc:root/init.brandy.usb.rc \
     $(LOCAL_PATH)/ueventd.brandy.rc:root/ueventd.brandy.rc \
     $(LOCAL_PATH)/prebuilt/initlogo.rle:root/initlogo.rle
 
@@ -46,7 +47,9 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -108,7 +111,8 @@ PRODUCT_PACKAGES += \
     lights.msm7x27 \
     bdaddr_read \
     CMFileManager \
-    CMFileManagerThemes
+    CMFileManagerThemes \
+    com.android.future.usb.accessory \
 
 # Media
 PRODUCT_PACKAGES += \
