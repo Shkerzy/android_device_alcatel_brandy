@@ -105,6 +105,7 @@ service bdaddr_read  /system/bin/bdaddr_read
     oneshot
 
 service cnd /system/bin/cnd
+    class main
     socket cnd stream 660 root radio
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -114,6 +115,7 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     oneshot
 
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
+    class main
 
 service qmuxd /system/bin/qmuxd
     class main
