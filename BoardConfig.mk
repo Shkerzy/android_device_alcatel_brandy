@@ -122,3 +122,12 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x09E60000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_PREBUILT_KERNEL := device/alcatel/brandy/kernel
+
+# TWRP
+DEVICE_RESOLUTION := 320x480
+SP1_NAME := "custpack"
+SP1_BACKUP_METHOD := files
+SP1_MOUNTABLE := 1
+TW_BOARD_CUSTOM_GRAPHICS := ../../../device/alcatel/brandy/recovery/twrpgraphics.c
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
