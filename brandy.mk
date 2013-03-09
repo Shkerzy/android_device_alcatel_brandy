@@ -113,6 +113,7 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     CMFileManagerThemes \
     com.android.future.usb.accessory \
+    Torch
 
 # Media
 PRODUCT_PACKAGES += \
