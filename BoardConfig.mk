@@ -131,3 +131,4 @@ SP1_MOUNTABLE := 1
 TW_BOARD_CUSTOM_GRAPHICS := ../../../device/alcatel/brandy/recovery/twrpgraphics.c
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
