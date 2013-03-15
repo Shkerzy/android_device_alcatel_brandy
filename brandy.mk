@@ -71,7 +71,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/keys/7k_ffa_keypad.kcm.bin:system/usr/keychars/7k_ffa_keypad.kcm.bin \
     $(LOCAL_PATH)/prebuilt/keys/7k_ffa_keypad.kl:system/usr/keylayout/7k_ffa_keypad.kl \
     $(LOCAL_PATH)/prebuilt/keys/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
-    $(LOCAL_PATH)/prebuilt/keys/ft5x02-touchscreen.idc:system/usr/idc/ft5x02-touchscreen.idc
+    $(LOCAL_PATH)/prebuilt/keys/ft5x02-touchscreen.idc:system/usr/idc/ft5x02-touchscreen.idc \
+    $(LOCAL_PATH)/prebuilt/keys/ft5x02-touchscreen.kl:system/usr/keylayout/ft5x02-touchscreen.kl
 
 # WiFi
 PRODUCT_COPY_FILES += \
