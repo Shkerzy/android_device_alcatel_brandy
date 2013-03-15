@@ -87,6 +87,9 @@ on boot
 
     write /proc/sys/vm/laptop_mode 5
 
+    # Enable torch
+    chmod 0666 /sys/devices/platform/flash_led/led
+
 service wifi_macaddr /system/bin/nvcmd 0 4678 6 /data/misc/macaddr --format=le
     oneshot
 
