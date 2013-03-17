@@ -7,7 +7,7 @@
 /dev/graphics/fb0         0666   graphics   graphics
 
 /dev/ttyHS0               0600   bluetooth  bluetooth
-/dev/oncrpc/*             0777   root       system
+/dev/oncrpc/*             0660   radio      system
 /dev/akm8975_dev          0777   compass    system
 /dev/akm8975_aot          0777   compass    system
 /dev/bma222               0777   compass    system
