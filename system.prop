@@ -32,5 +32,5 @@ persist.sys.usb.config=mass_storage,adb
 persist.service.adb.enable=1
 
 # Dalviks
-dalvik.vm.dexopt-data-only=1
+#dalvik.vm.dexopt-data-only=1
 dalvik.vm.execution-mode=int:jit

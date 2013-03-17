@@ -81,7 +81,8 @@ PRODUCT_COPY_FILES += \
 
 # init.d
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/etc/init.d/22ksm:system/etc/init.d/22ksm
+    $(LOCAL_PATH)/prebuilt/etc/init.d/22ksm:system/etc/init.d/22ksm \
+    $(LOCAL_PATH)/prebuilt/etc/init.d/06mountdl:system/etc/init.d/06mountdl
 
 # Audio
 PRODUCT_PACKAGES += \
