@@ -3,11 +3,6 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# OMX
-$(call inherit-product, vendor/qcom/opensource/omx/mm-core/Android.mk)
-$(call inherit-product, vendor/qcom/opensource/omx/mm-video/Android.mk)
-$(call inherit-product, vendor/qcom/opensource/omx/mm-audio/Android.mk)
-
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/alcatel/brandy/brandy-vendor.mk)
@@ -98,10 +93,6 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    libgenlock \
-    liboverlay \
-    libtilerenderer \
-    libopencorehw \
     gralloc.msm7x27 \
     copybit.msm7x27 \
     hwcomposer.msm7x27
@@ -120,33 +111,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
-    libstagefrighthw \
-    libdivxdrmdecrypt
+    libstagefrighthw
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hdmi_out=false \
-    debug.sf.hw=1 \
-    debug.enabletr=false \
-    debug.composition.type=gpu \
-    debug.gr.numframebuffers=2 \
-    debug.qctwa.statusbar=1 \
-    debug.qctwa.preservebuf=1 \
-    hwui.render_dirty_regions=false \
-    hwui.disable_vsync=true \
-    hwui.print_config=choice \
-    persist.sys.strictmode.visual=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.enable-player=true \
-    media.stagefright.enable-meta=false \
-    media.stagefright.enable-scan=false \
-    media.stagefright.enable-http=true \
-    media.stagefright.enable-aac=true \
-    media.stagefright.enable-qcp=true
 
 $(call inherit-product, build/target/product/full.mk)
 
