@@ -79,6 +79,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/prebuilt/wifi/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
+# init.d
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/init.d/22ksm:system/etc/init.d/22ksm
+
 # Audio
 PRODUCT_PACKAGES += \
     audio_policy.brandy \
