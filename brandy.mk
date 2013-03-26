@@ -47,7 +47,6 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
 
 PRODUCT_PACKAGES += \
-    libril \
     libOmxCore \
     libOmxVidEnc \
     copybit.msm7k \
