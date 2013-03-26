@@ -50,7 +50,7 @@ PRODUCT_PACKAGES += \
     libril \
     libOmxCore \
     libOmxVidEnc \
-    copybit.brandy \
+    copybit.msm7k \
     gralloc.brandy \
     lights.brandy \
     gps.brandy \
