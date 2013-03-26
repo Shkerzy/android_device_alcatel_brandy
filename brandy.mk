@@ -209,7 +209,7 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/keys/7k_ffa_keypad.kcm.bin:/system/usr/keychars/7k_ffa_keypad.kcm.bin \
     device/alcatel/brandy/proprietary/keys/7k_ffa_keypad.kl:/system/usr/keylayout/7k_ffa_keypad.kl \
     device/alcatel/brandy/proprietary/keys/7k_handset.kl:/system/usr/keylayout/7k_handset.kl \
-    device/alcatel/brandy/proprietary/keys/qwerty.kl:/system/usr/keylayout/qwerty.kl
+    device/alcatel/brandy/proprietary/keys/ft5x02-touchscreen.kl:system/usr/keylayout/ft5x02-touchscreen.kl
 
 # sh scripts
 PRODUCT_COPY_FILES += \
