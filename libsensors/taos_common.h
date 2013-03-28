@@ -34,28 +34,10 @@
     
 // device configuration
     struct taos_cfg {
-	u32 calibrate_target;
-	u16 als_time;
-	u16 scale_factor;
-	u16 gain_trim;
-	u8 filter_history;
-	u8 filter_count;
-	u8 gain;
-	u16 prox_threshold_hi;
-	u16 prox_threshold_lo;
-	u8 prox_int_time;
-	u8 prox_adc_time;
-	u8 wait_time;
-	u8 prox_intr_filter;
-	u8 prox_config;
-	u8 prox_pulse_cnt;
-	u8 prox_gain;
 };
 
 // proximity data
     struct taos_prox_info {
-	u16 prox_clear;
-	u16 prox_data;
 	int prox_event;
 };
 

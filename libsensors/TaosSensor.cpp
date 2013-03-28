@@ -31,7 +31,7 @@
 /*****************************************************************************/
 
 TaosSensor::TaosSensor()
-    : SensorBase(TAOS_DEVICE_NAME, "alsprox"),
+    : SensorBase(TAOS_DEVICE_NAME, "sensors_input"),
       mEnabled(0),
       mInputReader(4),
       mPendingMask(0)
