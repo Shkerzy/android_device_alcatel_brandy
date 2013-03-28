@@ -15,7 +15,9 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
-dalvik.vm.heapsize=32m
+
+ro.telephony.ril_class=lgeqcom
+
 #
 # system props for the MM modules
 #
@@ -34,3 +36,4 @@ ro.bluetooth.remote.autoconnect=true
 
 persist.service.adb.enable=1
 
+dalvik.vm.heapsize=32m
