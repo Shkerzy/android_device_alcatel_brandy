@@ -49,7 +49,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVidEnc \
-    copybit.msm7k \
+    copybit.brandy \
     gralloc.brandy \
     lights.brandy \
     gps.brandy \
