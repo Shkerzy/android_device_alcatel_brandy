@@ -104,7 +104,8 @@ static uint32_t SND_DEVICE_NO_MIC_HEADSET=-1;
 
 AudioHardware::AudioHardware() :
     mInit(false), mMicMute(true), mBluetoothNrec(true), mBluetoothId(0),
-    mOutput(0), mSndEndpoints(NULL), mCurSndDevice(-1), mDualMicEnabled(false), mBuiltinMicSelected(false)
+    mOutput(0), mSndEndpoints(NULL), mCurSndDevice(-1), mDualMicEnabled(false), mBuiltinMicSelected(false),
+    mFmRadioEnabled(false), mFmPrev(false), mFmVolume(0), fmfd(-1)
 {
    if (get_audpp_filter() == 0) {
            audpp_filter_inited = true;
@@ -135,6 +136,8 @@ AudioHardware::AudioHardware() :
                 CHECK_FOR(TTY_HEADSET);
                 CHECK_FOR(TTY_HCO);
                 CHECK_FOR(TTY_VCO);
+                CHECK_FOR(FM_SPEAKER);
+                CHECK_FOR(FM_HEADSET);
 #undef CHECK_FOR
             }
         }
@@ -416,6 +419,19 @@ status_t AudioHardware::setParameters(const String8& keyValuePairs)
     } else {
 	mTtyMode = TTY_OFF;
     }
+
+#ifdef HAVE_FM_RADIO
+    key = String8(AudioParameter::keyFmOn);
+    int devices;
+    if (param.getInt(key, devices) == NO_ERROR) {
+       setFmOnOff(true);
+    }
+    key = String8(AudioParameter::keyFmOff);
+    if (param.getInt(key, devices) == NO_ERROR) {
+       setFmOnOff(false);
+    }
+#endif
+
     doRouting(NULL);
 
     return NO_ERROR;
@@ -1153,6 +1169,21 @@ status_t AudioHardware::setMasterVolume(float v)
     return -1;
 }
 
+#ifdef HAVE_FM_RADIO
+status_t AudioHardware::setFmOnOff(bool onoff)
+{
+    int ret;
+
+    if (onoff) {
+        mFmRadioEnabled = true;
+    } else {
+        mFmRadioEnabled = false;
+    }
+
+    return NO_ERROR;
+}
+#endif
+
 static status_t do_route_audio_rpc(uint32_t device,
                                    bool ear_mute, bool mic_mute, int m7xsnddriverfd)
 {
@@ -1222,6 +1253,13 @@ status_t AudioHardware::doAudioRouteOrMute(uint32_t device)
         mute = !mBuiltinMicSelected;
     }
 
+    mFmPrev=mFmRadioEnabled;
+#ifdef HAVE_FM_RADIO
+    if(mFmRadioEnabled) {
+      mute = 0;
+      LOGI("unmute for radio");
+    }
+#endif
     LOGD("doAudioRouteOrMute() device %x, mMode %d, mMicMute %d, mBuiltinMicSelected %d, %s",
         device, mMode, mMicMute, mBuiltinMicSelected, mute ? "muted" : "audio circuit active");
     return do_route_audio_rpc(device, mute, mMicMute, m7xsnddriverfd);
@@ -1325,12 +1363,22 @@ we are in a call or not to determine which route to use. */
                 new_snd_device = SND_DEVICE_HEADSET;
                 new_post_proc_feature_mask = (ADRC_ENABLE | EQ_ENABLE | RX_IIR_ENABLE | MBADRC_ENABLE);
         } else if (outputDevices & AudioSystem::DEVICE_OUT_WIRED_HEADSET) {
-            LOGI("Routing audio to Wired Headset\n");
-            new_snd_device = SND_DEVICE_HEADSET;
+            if (mFmRadioEnabled) {
+                LOGI("Routing FM audio to Wired Headset\n");
+                new_snd_device = SND_DEVICE_FM_HEADSET;
+            } else {
+            	LOGI("Routing audio to Wired Headset\n");
+            	new_snd_device = SND_DEVICE_HEADSET;
+		}
             new_post_proc_feature_mask = (ADRC_ENABLE | EQ_ENABLE | RX_IIR_ENABLE | MBADRC_ENABLE);
         } else if (outputDevices & AudioSystem::DEVICE_OUT_SPEAKER) {
-            LOGI("Routing audio to Speakerphone\n");
-            new_snd_device = SND_DEVICE_SPEAKER;
+            if (mFmRadioEnabled) {
+                LOGI("Routing audio to FM Speakerphone\n");
+                new_snd_device = SND_DEVICE_FM_SPEAKER;
+            } else {
+            	LOGI("Routing audio to Speakerphone\n");
+            	new_snd_device = SND_DEVICE_SPEAKER;
+		}
             new_post_proc_feature_mask = (ADRC_ENABLE | EQ_ENABLE | RX_IIR_ENABLE | MBADRC_ENABLE);
         } else {
             LOGI("Routing audio to Handset\n");
@@ -1349,7 +1397,7 @@ we are in a call or not to determine which route to use. */
         }
     }
 
-    if (new_snd_device != -1 && new_snd_device != mCurSndDevice) {
+    if ((new_snd_device != -1 && new_snd_device != mCurSndDevice) || mFmRadioEnabled != mFmPrev) {
         ret = doAudioRouteOrMute(new_snd_device);
 
        //disable post proc first for previous session
@@ -2156,6 +2204,24 @@ status_t AudioHardware::AudioStreamInMSM72xx::setParameters(const String8& keyVa
     }
     return status;
 }
+
+#ifdef HAVE_FM_RADIO
+
+status_t AudioHardware::setFmVolume(float v)
+{
+    float ratio = 2.5;
+    int volume = (unsigned int)(AudioSystem::logToLinear(v) * ratio);
+    char volhex[10] = "";
+    sprintf(volhex, "0x%x ", volume);
+    char volreg[100] = "hcitool cmd 0x3f 0x15 0xf8 0x0 ";
+
+    strcat(volreg, volhex);
+    strcat(volreg, "0");
+
+    system(volreg);
+    return NO_ERROR;
+}
+#endif
 
 String8 AudioHardware::AudioStreamInMSM72xx::getParameters(const String8& keys)
 {
