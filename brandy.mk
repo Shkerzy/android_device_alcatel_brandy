@@ -178,8 +178,6 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/liboemcamera.so:/system/lib/liboemcamera.so \
     device/alcatel/brandy/proprietary/lib/libmmjpeg.so:/system/lib/libmmjpeg.so \
     device/alcatel/brandy/proprietary/lib/libmmipl.so:/system/lib/libmmipl.so \
-    device/alcatel/brandy/proprietary/lib/libcamera_client.so:/system/lib/libcamera_client.so \
-    device/alcatel/brandy/proprietary/lib/libcameraservice.so:/system/lib/libcameraservice.so \
     device/alcatel/brandy/proprietary/lib/libcamera.so:/obj/lib/libcamera.so \
     device/alcatel/brandy/proprietary/lib/libcamera.so:/system/lib/libcamera.so
 

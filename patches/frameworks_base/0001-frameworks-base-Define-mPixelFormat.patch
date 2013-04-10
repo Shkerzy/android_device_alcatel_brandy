@@ -1,0 +1,32 @@
+From 82bd3981440b5f7dab24637c40786a931a624a22 Mon Sep 17 00:00:00 2001
+From: Shkerzy <niksamnoy@gmail.com>
+Date: Thu, 11 Apr 2013 04:12:23 +0800
+Subject: [PATCH] frameworks/base: Define mPixelFormat
+
+It's define default by CAF, without it cause this error:
+
+I/CameraService(147): registerPreviewBuffers: previewFormat = yuv420sp and PixelFormat = 13140044
+E/SurfaceFlinger(234): LayerBuffer::BufferSource: invalid format 13140044 (Unknown error: -75)
+E/CameraService(147): registerBuffers failed with status -75
+
+Change-Id: I2e61a51197449f643c2fc0f87ab9b029d62ca475
+---
+ services/camera/libcameraservice/CameraService.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/services/camera/libcameraservice/CameraService.cpp b/services/camera/libcameraservice/CameraService.cpp
+index 55604fb..5e57ccb 100644
+--- a/services/camera/libcameraservice/CameraService.cpp
++++ b/services/camera/libcameraservice/CameraService.cpp
+@@ -472,6 +472,8 @@ CameraService::Client::Client(const sp<CameraService>& cameraService,
+         mOverlayW = 0;
+         mOverlayH = 0;
+ 
++        mPixelFormat = HAL_PIXEL_FORMAT_YCrCb_420_SP;
++
+ #ifdef OMAP_ENHANCEMENT
+ 	mS3DOverlay = false;
+ #endif
+-- 
+1.7.10
+
