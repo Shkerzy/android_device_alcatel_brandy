@@ -55,7 +55,7 @@ PRODUCT_PACKAGES += \
     gps.brandy \
     bdaddr_read
 
-
+# Config
 PRODUCT_COPY_FILES += \
     device/alcatel/brandy/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     device/alcatel/brandy/media_profiles.xml:system/etc/media_profiles.xml
