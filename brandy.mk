@@ -112,8 +112,7 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/lib/libril-qc-qmi-1.so:/system/lib/libril-qc-qmi-1.so \
     device/alcatel/brandy/proprietary/lib/libril-qcril-hook-oem.so:/system/lib/libril-qcril-hook-oem.so \
     device/alcatel/brandy/proprietary/lib/libwms.so:system/lib/libwms.so \
-    device/alcatel/brandy/proprietary/lib/libwmsts.so:system/lib/libwmsts.so \
-    device/alcatel/brandy/proprietary/etc/apns-conf.xml:system/etc/apns-conf.xml
+    device/alcatel/brandy/proprietary/lib/libwmsts.so:system/lib/libwmsts.so
 
 # GPS
 PRODUCT_COPY_FILES += \
