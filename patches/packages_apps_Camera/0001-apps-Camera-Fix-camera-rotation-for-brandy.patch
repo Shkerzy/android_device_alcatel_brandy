@@ -1,0 +1,48 @@
+From 327764cb0fb483b7c899533933a9b82cb89f12a9 Mon Sep 17 00:00:00 2001
+From: Shkerzy <niksamnoy@gmail.com>
+Date: Fri, 19 Apr 2013 23:24:44 +0800
+Subject: [PATCH] apps/Camera: Fix camera rotation for brandy
+
+ro.device.screenrotation!=0 cause FC this app in portrait orientation
+
+Change-Id: I0f4bd8810d4cbc30ea19bede3ce3590500b104ac
+---
+ src/com/android/camera/Camera.java      |    4 ++--
+ src/com/android/camera/VideoCamera.java |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/com/android/camera/Camera.java b/src/com/android/camera/Camera.java
+index af7da88..4331892 100644
+--- a/src/com/android/camera/Camera.java
++++ b/src/com/android/camera/Camera.java
+@@ -822,9 +822,9 @@ public class Camera extends BaseCamera implements View.OnClickListener,
+                 CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+                 if (info.facing == CameraInfo.CAMERA_FACING_FRONT &&
+                         info.orientation != 90) {
+-                    rotation = (info.orientation - mOrientation + mDeviceScreenRotation + 360) % 360;
++                    rotation = (info.orientation - mOrientation + mDeviceScreenRotation + 360 + 90) % 360;
+                 } else {  // back-facing camera (or acting like it)
+-                    rotation = (info.orientation + mOrientation  - mDeviceScreenRotation) % 360;
++                    rotation = (info.orientation + mOrientation  - mDeviceScreenRotation + 90) % 360;
+                 }
+             }
+             mParameters.setRotation(rotation);
+diff --git a/src/com/android/camera/VideoCamera.java b/src/com/android/camera/VideoCamera.java
+index a3bb15c..c6d09ac 100644
+--- a/src/com/android/camera/VideoCamera.java
++++ b/src/com/android/camera/VideoCamera.java
+@@ -1123,9 +1123,9 @@ public class VideoCamera extends BaseCamera
+         if (mOrientation != OrientationEventListener.ORIENTATION_UNKNOWN) {
+             CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+             if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+-                rotation = (info.orientation - mOrientation + mDeviceScreenRotation + 360) % 360;
++                rotation = (info.orientation - mOrientation + mDeviceScreenRotation + 360 + 90) % 360;
+             } else {  // back-facing camera
+-                rotation = (info.orientation + mOrientation - mDeviceScreenRotation) % 360;
++                rotation = (info.orientation + mOrientation - mDeviceScreenRotation + 90) % 360;
+             }
+         }
+         mMediaRecorder.setOrientationHint(rotation);
+-- 
+1.7.10
+
