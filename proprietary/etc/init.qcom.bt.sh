@@ -52,7 +52,7 @@ failed ()
 start_hciattach ()
 {
   echo 1 > $BLUETOOTH_SLEEP_PATH
-  /system/bin/brcm_patchram_plus -d --enable_hci --enable_lpm --baudrate 3000000 --bd_addr "$mac_addr" --patchram /system/bin/BCM4329B1_002_1_002_023_0797_0834.hcd /dev/ttyHS0 &
+  /system/bin/brcm_patchram_plus -d --enable_hci --enable_lpm --baudrate 3000000 --bd_addr "$mac_addr" --patchram /system/bin/BCM4329B1_002_1_002_023_0797_0834.hcd --scopcm=0,0,0,0,0,0,4,0,0,0 --tosleep=50000 /dev/ttyHS0 &
   hciattach_pid=$!
   loge "start_hciattach: pid = $hciattach_pid"
 }
