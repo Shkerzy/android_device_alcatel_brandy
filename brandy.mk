@@ -217,6 +217,11 @@ PRODUCT_COPY_FILES += \
     device/alcatel/brandy/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/alcatel/brandy/proprietary/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
+# Webkit
+PRODUCT_COPY_FILES += \
+    device/alcatel/brandy/proprietary/lib/libwebkitaccel.so:obj/lib/libwebkitaccel.so \
+    device/alcatel/brandy/proprietary/lib/libwebkitaccel.so:system/lib/libwebkitaccel.so
+
 PRODUCT_LOCALES += mdpi
 
 PRODUCT_PROPERTY_OVERRIDES := \
