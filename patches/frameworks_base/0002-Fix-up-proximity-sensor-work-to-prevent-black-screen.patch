@@ -1,0 +1,27 @@
+From 7a405d33f245e37984eb132bdfbc6603d9fc6544 Mon Sep 17 00:00:00 2001
+From: Gulyuk <gulyuk.sergey@gmail.com>
+Date: Mon, 27 May 2013 21:34:59 +0800
+Subject: [PATCH] Fix up proximity sensor work to prevent black screen after
+ phone call
+
+Change-Id: I7de33da62b8ab4904cc24c0e702e687131ce5fab
+---
+ services/java/com/android/server/PowerManagerService.java |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/services/java/com/android/server/PowerManagerService.java b/services/java/com/android/server/PowerManagerService.java
+index c51e3dc..a0a8186 100644
+--- a/services/java/com/android/server/PowerManagerService.java
++++ b/services/java/com/android/server/PowerManagerService.java
+@@ -113,7 +113,7 @@ class PowerManagerService extends IPowerManager.Stub
+     private static final int LIGHT_SENSOR_DELAY = 2000;
+ 
+     // For debouncing the proximity sensor.
+-    private static final int PROXIMITY_SENSOR_DELAY = 1000;
++    private static final int PROXIMITY_SENSOR_DELAY = 400;
+ 
+     // trigger proximity if distance is less than 5 cm
+     private static final float PROXIMITY_THRESHOLD = 5.0f;
+-- 
+1.7.10
+
